@@ -1,0 +1,726 @@
+//1 - 1   1번들 예시 입력시 0 이후에 입력이 없다고 
+#include <stdio.h>
+#include <stdlib.h> 
+#include <string.h>
+
+int maxmin(int ar[]){
+    
+    int *p = ar;
+    int max = *p - 1;
+    int min = *p + 1;
+    
+    for(p=ar; ;p++){
+        if(*p == 0)
+            break;
+        if(*p >= max)
+            max = *p;
+        if(*p <= min)
+            min = *p;
+    }
+    
+    return max - min;
+}
+
+int main()
+{
+	int n;
+	int ar[100];
+	int *p = ar;
+	int i;
+	int result;
+	
+	scanf("%d",&n);
+	
+	for(i=0;i<n;i++){
+	    for(p = ar; ;p++){
+	        scanf("%d",p);
+	        if(*p == 0)
+	            break;
+	    }
+	    result = maxmin(ar);
+	    
+	    printf("result : %d\n",result);
+	}
+        
+	return 0;
+}
+
+//1-2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int *maxmin(int ar[]){
+    
+    int *p = ar;
+    int max = *p - 1;
+    int min = *p + 1;
+    int k;
+    int real;
+    int cha = 0;
+    int *r;
+    
+    for(p=ar; ;p++){
+        if(*p == 0)
+            break;
+        if(*p >= max)
+            max = *p;
+        if(*p <= min)
+            min = *p;
+    }
+    
+    k = max - min;
+    p = ar;
+    
+    if(*p > k)
+        real = *p - k;
+    else
+        real = k - *p;
+        
+    r = p;
+            
+    for(p=ar;*p!=0;p++){
+        if(*p > k)
+            cha = *p - k;
+        else
+            cha = k - *p;
+            
+        if(real > cha){
+            real = cha;
+            r = p;
+        }
+    }
+    
+    return r;
+}
+
+int main()
+{
+	int n;
+	int ar[100];
+	int *p = ar;
+	int i;
+	int *result;
+	
+	scanf("%d",&n);
+	
+	for(i=0;i<n;i++){
+	    for(p = ar; ;p++){
+	        scanf("%d",p);
+	        if(*p == 0)
+	            break;
+	    }
+	    result = maxmin(ar);
+	    
+	    printf("result : %d\n",*result);
+	}
+        
+	return 0;
+}
+
+/////다른버전
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int *maxmin(int* ar);
+
+int main()
+{
+    int n;
+    int ar[100];
+    int* p;
+    int* q;
+    int i;
+    int* result;
+
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        for (p = ar; ; p++) {
+            scanf("%d", p);
+
+            if (*p == 0)
+                break;
+        }
+
+        result = maxmin(ar);
+
+        printf("%d\n", *result);
+    }
+
+    return 0;
+}
+
+int *maxmin(int* ar) {
+
+    int* p;
+    int max = *ar , min = *ar;
+    int k;
+    int result;
+    int* q = ar;
+
+    for (p = ar; *p != 0; p++) {
+        if (*p >= max)
+            max = *p;
+        if (*p <= min)
+            min = *p;
+    }
+
+    k = max - min;
+    
+    if (*ar - k > 0)
+        min = *ar - k;
+    else
+        min = k - *ar;
+
+    for (p = ar; *p != 0; p++) {
+        if (*p > k)
+            result = *p - k;
+        else
+            result = k - *p;
+
+        if (min > result) {
+            min = result;
+            q = p;
+        }
+    }
+
+    return q;
+
+}
+
+
+
+
+//2-1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int x[6];
+    int *p, *q, *r;
+    int cnt = 0;
+    int f = 0, check = 0;
+    
+    for(p=x;p<x+6;p++)
+        scanf("%d",p);
+        
+    for(p=x;p<x+6;p++){
+        if(p!=x){
+            for(r=x;r<p;r++){
+                if(*r == *p){
+                    check = 1;
+                    break;
+                }
+            }
+        }
+        if(check == 0){
+            for(q=p;q<x+6;q++){
+                if(*q == *p)
+                    cnt += 1;
+            }
+        }
+        
+        if(cnt >= 2){
+            printf("%d %d\n",*p,cnt);
+            f = 0;
+        }
+        
+        check = 0;
+        cnt = 0;
+    }
+    
+    if(f == 0)
+        printf("%d",f);
+	   
+	return 0;
+}
+
+///다른버전
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int main()
+{
+    int x[6];
+    int* p, *q;
+    int f = 1, f2;
+    int cnt = 0;
+
+    for (p = x; p < x + 6; p++)
+        scanf("%d", p);
+
+    for (p = x; p < x + 6; p++) {
+        cnt = 0;
+        for (q = x; q < x + 6; q++) {
+            if (*p == *q)
+                cnt += 1;
+        }
+
+        f2 = 1;
+
+        if (cnt >= 2) {
+            f = 0;
+            for (q = x; q < p; q++) {
+                if (*p == *q) {
+                    f2 = 0;
+                    break;
+                }
+            }
+        }
+
+        if (f2 == 1 && cnt >= 2)
+            printf("%d %d\n", *p, cnt);
+
+    }
+    
+    if (f == 1)
+        printf("0");
+
+    return 0;
+}
+
+
+
+
+
+
+//2-2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int upper(int *arr){
+    
+    int i;
+    
+    for(i=1;i<=45;i++){
+        if(*arr != i && *(arr+1) != i && *(arr+2) != i && *(arr+3) != i && *(arr+4) != i && *(arr+5) != i)
+            break;
+    }
+    
+    return i;
+}
+
+int correct(int *arr){
+    
+    int *p, *q;
+    int k;
+    int f = 0;
+    
+    for(p=arr;p<arr+5;p++){
+        for(q=p+1;q<arr+6;q++){
+            if(*p == *q){
+                k = upper(arr);
+                *p = k;
+                f = 1;
+                break;
+            }
+        }
+    }
+    
+    return f;
+    
+}
+
+int main()
+{
+    int x[6];
+    int *p = x;
+    int result;
+    
+    for(p=x;p<x+6;p++)
+        scanf("%d",p);
+        
+    result = correct(x);
+    
+    printf("%d\n",result);
+    
+    for(p=x;p<x+6;p++)
+        printf("%d ",*p);
+	   
+	return 0;
+}
+
+//다른버전ㄴ
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int correct(int* arr);
+int upper(int* arr);
+
+int main()
+{
+    int x[6];
+    int* p, *q;
+    int cor;
+    int k;
+
+    for (p = x; p < x + 6; p++) {
+        scanf("%d", p);
+    }
+
+    k = correct(x);
+
+    printf("%d\n", k);
+
+    for (p = x; p < x + 6; p++)
+        printf(" %d", *p);
+
+    return 0;
+}
+
+int correct(int* arr) {
+
+    int* p;
+    int* q;
+    int cnt = 0;
+    int f = 0;
+    int k;
+
+    for (p = arr; p < arr + 6; p++) {
+        cnt = 0;
+        for (q = arr; q < arr + 6; q++) {
+            if (*p == *q)
+                cnt += 1;
+        }
+        if (cnt >= 2) {
+            f = 1;
+            k = upper(arr);
+            *p = k;
+        }
+    }
+
+    return f;
+}
+
+int upper(int* arr) {
+
+    int i = 1;
+    int* p;
+    int f = 1;
+
+    for (i = 1; i <= 45; i++) {
+        f = 1;
+        for (p = arr; p < arr + 6; p++) {
+            if (i == *p) {
+                f = 0;
+                break;
+            }
+        }
+        if (f == 1)
+            break;
+    }
+
+    return i;
+}
+
+
+
+//3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void input(char *p, int n){
+    
+    scanf("%s",p);
+        
+}
+
+void upper(char *p, int n){
+    
+    char *q;
+    
+    for(q=p;q<p+n;q++){
+        if(*q >='A' && *q <= 'Z')
+            printf("%c",*q);
+    }
+    
+    printf("\n");
+}
+
+void lower(char *p, int n){
+    
+    char *q;
+    
+    for(q=p;q<p+n;q++){
+        if(*q >='a' && *q <='z')
+            printf("%c",*q);
+    }
+    
+    printf("\n");
+}
+
+int DOUBLE(char *p, int n){
+    
+    char *q;
+    int total = 0;
+    int k;
+    
+    for(q=p;q<p+n;q++){
+        if(*q >= '0' && *q <= '9'){
+            k = *q - '0';
+            total = total * 10 + k;
+        }
+    }
+    
+    return total * 2;
+}
+
+int main()
+{
+    int n;
+    char x[20];
+    int result;
+    
+    scanf("%d",&n);
+    
+    input(x,n);
+    upper(x,n);
+    lower(x,n);
+    result = DOUBLE(x,n);
+    
+    printf("%d",result);
+	   
+	return 0;
+}
+
+//4
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+    
+    int n = 0, m = 0;
+    int a[10], b[10];
+    int *p = a, *q = b;
+    int tmp;
+    
+    for(p=a; ;p++){
+        scanf("%d",p);
+        if(*p == 0)
+            break;
+        n += 1;
+    }
+    
+    for(q=b; ;q++){
+        scanf("%d",q);
+        if(*q == 0)
+            break;
+        m += 1;
+    }
+    
+    for(p=a;p<a+n;p++){
+        for(q=b;q<b+m;q++){
+            if(*p <= *q){
+                tmp = *p;
+                *p = *q;
+                *q = tmp;
+            }
+        }
+    }
+    
+    for(p=a;p<a+n;p++){
+        for(q=a;q<a+n;q++){
+            if(*q <= *p){
+                tmp = *p;
+                *p = *q;
+                *q = tmp;
+            }
+        }
+    }
+    
+    for(p=b;p<b+m;p++){
+        for(q=b;q<b+m;q++){
+            if(*q >= *p){
+                tmp = *p;
+                *p = *q;
+                *q = tmp;
+            }
+        }
+    }
+    
+    for(p=a;p<a+n;p++)
+        printf("%d ",*p);
+    
+    printf("\n");
+    
+    for(q=b;q<b+m;q++)
+        printf("%d ",*q);
+        
+    return 0;
+}
+
+///다른버전 : 알고리즘은 같은데 정렬 방식에 차이 있음
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n = 0, m = 0;
+    int a[100], b[100];
+    int* p, * q;
+    int tmp;
+    int i, j;
+
+    for (p = a; ; p++) {
+        scanf("%d", p);
+        if (*p == 0)
+            break;
+        n += 1;
+    }
+
+    for (p = b; ; p++) {
+        scanf("%d", p);
+        if (*p == 0)
+            break;
+        m += 1;
+    }
+
+    for (p = a; p < a + n; p++) {
+        for (q = b; q < b + m; q++) {
+            if (*p <= *q) {
+                tmp = *p;
+                *p = *q;
+                *q = tmp;
+            }
+        }
+    }
+
+    p = a;
+    q = b;
+
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+            if (*(p + j) <= *(p + j + 1)) {
+                tmp = *(p + j);
+                *(p + j) = *(p + j + 1);
+                *(p + j + 1) = tmp;
+            }
+        }
+    }
+
+    for (i = 0; i < m - 1; i++) {
+        for (j = 0; j < m - 1 - i; j++) {
+            if (*(q + j) >= *(q + j + 1)) {
+                tmp = *(q + j);
+                *(q + j) = *(q + j + 1);
+                *(q + j + 1) = tmp;
+            }
+        }
+    }
+
+    for (p = a; p < a + n; p++)
+        printf("%d ", *p);
+    printf("\n");
+
+    for (q = b; q < b + m; q++)
+        printf("%d ", *q);
+
+    return 0;
+}
+
+
+
+//5
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+    
+    char x[1000];
+    char *p = x;
+    char *q, *r, *s;
+    
+    for(p=x; ;p++){
+        scanf("%c",p);
+        if(*p == '.' || *p == '?' || *p == '!'){
+            q = p;
+            break;
+        }
+    }
+    
+    for(p=x;p<q;p++){
+        if(*p == ' ')
+            *p = '\0';
+    }
+    
+    for(p=q-1;p>=x;p--){
+        for(r=p;r>=x;r--){
+            if(*r == '\0'){
+                for(s=r+1;s<=p;s++)
+                    printf("%c",*s);
+                p = r - 1;
+                printf(" ");
+            }
+            else if(p == x){
+                for(s=p;*s!='\0';s++)
+                    printf("%c",*s);
+                printf("%c",*q);
+            }
+        }
+    }
+        
+    return 0;
+}
+
+
+///다른버전
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main()
+{
+    char x[2000];
+    char* p = x;
+    char* q, * k, * r;
+
+    for (p = x; ; p++) {
+        scanf("%c", p);
+        if (*p == '.' || *p == '?' || *p == '!')
+            break;
+    }
+
+    for (q = p - 1; q >= x; q--) {
+        for (k = q; k >= x; k--) {
+            if (*k == ' ' || k == x)
+                break;
+        }
+        if (k != x) {
+            for (r = k + 1; r <= q; r++)
+                printf("%c", *r);
+            printf(" ");
+            q = k;
+        }
+        else {
+            for (r = x; r <= q; r++)
+                printf("%c", *r);
+            q = x;
+        }
+    }
+
+    printf("%c", *p);
+
+    return 0;
+}

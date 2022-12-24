@@ -1,0 +1,293 @@
+//1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int n, m, tmp;
+	int i;
+	int cnt2 = 0, sum2 = 0;
+	int cnt3 = 0, sum3 = 0;
+	
+	scanf("%d %d",&n, &m);
+	
+	if(n > m){
+	    tmp = n;
+	    n = m;
+	    m = tmp;
+	}
+	
+	for(i=n;i<=m;i++){
+	    if(i%2 == 0){
+	        printf(" %d",i);
+	        cnt2 += 1;
+	        sum2 += i;
+	    }
+	}
+	
+	printf(" cnt=%d sum=%d\n",cnt2,sum2);
+	
+	for(i=n;i<=m;i++){
+	    if(i%3 == 0){
+	        printf(" %d",i);
+	        cnt3 += 1;
+	        sum3 += i;
+	    }
+	}
+	
+	printf(" cnt=%d sum=%d\n",cnt3,sum3);
+	
+	return 0;
+}
+
+//2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int n, m, tmp;
+    int i,j;
+    int cnt = 0;
+    int result = 0;
+    
+    scanf("%d %d",&n, &m);
+    
+    if(n > m){
+        tmp = n;
+        n = m;
+        m = tmp;
+    }
+	
+	for(i=n;i<=m;i++){
+	    for(j=1;j<=i;j++){
+	        if(i%j == 0)
+	            cnt += 1;
+	    }
+	    if(cnt %2==0)
+	        result += 1;
+	    cnt = 0;
+	}
+	
+	printf("%d",result);
+	
+	return 0;
+}
+
+//3 맞는지 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int n;
+    int i, j;
+    
+    scanf("%d",&n);
+    
+    for(i=1;i<=n;i++){
+        for(j=n;j>i;j--)
+            printf("  ");
+        for(j=1;j<=i*2-1;j++)
+            printf("*");
+        printf("\n");
+    }
+    
+    for(i=n-1;i>=1;i--){
+        for(j=n;j>i;j--)
+            printf("  ");
+        for(j=1;j<=i*2-1;j++)
+            printf("*");
+        printf("\n");
+    }
+	
+	return 0;
+}
+
+//3 다른버전
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int main()
+{
+    int n;
+    int i, j;
+
+    scanf("%d", &n);
+
+    for (i = 1; i <= n; i++) {
+        for (j = n; j > i; j--)
+            printf(" ");
+        for (j = 1; j <= 2 * i - 1; j++)
+            printf("*");
+        printf("\n");
+    }
+
+    for (i = n - 1; i >= 1; i--) {
+        for (j = n - 1; j >= i; j--)
+            printf(" ");
+        for (j = 1; j <= 2 * i - 1; j++)
+            printf("*");
+        printf("\n");
+    }
+
+
+
+    return 0;
+}
+
+//4-1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int n;
+    int big = 0, small = 0, same = 0;
+    int k;
+    
+    scanf("%d",&n);
+    
+    while(1){
+        scanf("%d",&k);
+        if(k==0)
+            break;
+        else if(k<n)
+            small += 1;
+        else if(k>n)
+            big += 1;
+        else if(k == n)
+            same += 1;
+
+    }
+	printf("%d %d %d",same,small,big);
+	
+	return 0;
+}
+
+//4-2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int n;
+    int big = 0, small = 0, same = 0;
+    int k;
+    int s;
+    
+    scanf("%d",&n);
+    
+    while(1){
+        scanf("%d",&k);
+        if(k == 0)
+            break;
+        while(1){
+            s = k % 10;
+            if(k==0)
+                break;
+            else if(s<n)
+                small += 1;
+            else if(s>n)
+                big += 1;
+            else if(s == n)
+                same += 1;
+             k = k / 10;
+        }
+    }
+	printf("%d %d %d",same,small,big);
+	
+	return 0;
+}
+
+//5-1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int n;
+    int total = 0;
+    
+    scanf("%d",&n);
+    
+    while(1){
+        if(n == 0)
+            break;
+        total *= 10;
+        total += n % 10;
+        n = n / 10;
+    }
+    
+    printf("%d",total);
+	
+	return 0;
+}
+
+//5-2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int n;
+    int total = 0;
+    
+    scanf("%d",&n);
+    
+    while(1){
+        if(n == 0)
+            break;
+        total *= 10;
+        total += n % 10;
+        n = n / 10;
+    }
+    
+    printf("%d",total*total);
+	
+	return 0;
+}
+
+//5-3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int n;
+    int total1 = 0, total2=0;
+    
+    scanf("%d",&n);
+    
+    while(1){
+        if(n == 0)
+            break;
+        
+        if((n%10) % 2 == 0){
+            total2 *= 10;
+            total2 += n % 10;
+            n = n / 10;
+        }
+        else{
+            total1 *= 10;
+            total1 += n % 10;
+            n = n / 10;
+        }
+    }
+    
+    printf("%d %d",total2, total1);
+	
+	return 0;
+}

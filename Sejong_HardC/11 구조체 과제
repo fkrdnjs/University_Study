@@ -1,0 +1,53 @@
+1-2번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct student {
+
+    char name[10];
+    char num[11];
+    char score;
+
+};
+
+typedef struct student st;
+
+int main()
+{
+    st x[5];
+    int i, j;
+    char n[10];
+    char k;
+    char year[5];
+    int f = 0;
+
+    for (i = 0; i < 5; i++)
+        scanf("%s %s %c", x[i].name, x[i].num, &x[i].score);
+
+    scanf("%s", n);
+
+    for (i = 0; i < 5; i++) {
+        x[i].num[4] = '\0';
+        if (strcmp(x[i].name, n) == 0) {
+            k = x[i].score;
+            strcpy(year, x[i].num);
+        }
+    }
+
+    for (i = 0; i < 5; i++) {
+        if (k == x[i].score && strcmp(year, x[i].num) == 0 && strcmp(n, x[i].name) != 0) {
+            f = 1;
+            printf(" %s\n", x[i].name);
+        }
+    }
+
+    if (f == 0)
+        printf("%d", f);
+
+    return 0;
+}
+
+

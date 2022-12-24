@@ -1,0 +1,535 @@
+//1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void factor (int n){
+    
+    int i;
+    
+    for(i=1;i<=n;i++){
+        if(n%i == 0)
+            printf(" %d",i);
+    }
+    printf("\n");
+}
+
+int main(){
+    
+    int k;
+    
+    while(1){
+        scanf("%d",&k);
+        if( k <= 0)
+            break;
+        factor(k);
+    }
+    
+    return 0;
+}
+
+//2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void triangle(int x){
+    
+    int i, j;
+    
+    for(i=1;i<=x;i++){
+        for(j=x;j>i;j--)
+            printf("  ");
+        for(j=1;j<=2*i-1;j++)
+            printf("*");
+        printf("\n");
+    }
+}
+
+void reverse(int x){
+    
+    int i, j;
+    
+    for(i=x;i>=1;i--){
+        for(j=x;j>i;j--)
+            printf("  ");
+        for(j=1;j<=2*i-1;j++)
+            printf("*");
+        printf("\n");
+    }
+}
+
+int main(){
+    
+    int n;
+    
+    scanf("%d",&n);
+    
+    if(n%2 == 0)
+        triangle(n);
+    else
+        reverse(n);
+    
+    return 0;
+}
+
+//3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int multiple(int x, int y){
+    
+    if(x % y == 0)
+        return 1;
+    else
+        return 0;
+}
+
+int maximum(int x, int y){
+    
+    if(x < y)
+        return y;
+    else
+        return x;
+}
+
+int digit_maximum(int x){
+    
+    int max = -1;
+    int k;
+    
+    while(1){
+        k = x % 10;
+        max = maximum(max,k);
+        x = x / 10;
+        if(x == 0)
+            break;
+    }
+    
+    return max;
+}
+
+int main()
+{
+	int n, m, k;
+	int i;
+	int mul, maxi, digit;
+	int max = -1;
+	int max2 = -1;
+	int result;
+	
+	scanf("%d %d %d",&n, &m, &k);
+	
+	for(i=n;i<=m;i++){
+	    mul = multiple(i,k);
+	    if(mul == 1){
+	        digit = digit_maximum(i);
+	        max = maximum(max,digit);
+	    }
+	    else{
+	        digit = i % k;
+	        max2 = maximum(max2,digit);
+	    }
+	}
+	
+	result = maximum(max, max2);
+	
+	printf("%d",result);
+
+	return 0;
+}
+
+
+
+다른버전
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int multiple(int x, int y);
+int maximum(int x, int y);
+int digit(int x);
+
+int main()
+{
+    int n, m, k;
+    int i;
+    int max = -1;
+    int mid;
+    int mul;
+
+    scanf("%d %d %d", &n, &m, &k);
+
+    for (i = n; i <= m; i++) {
+        mul = multiple(i, k);
+
+        if (mul == 1) {
+            mid = digit(i);
+        }
+
+        else {
+            mid = i % k;
+        }
+
+        max = maximum(max, mid);
+    }
+    
+    printf("%d", max);
+
+    return 0;
+}
+
+int multiple(int x, int y) {
+
+    if (x % y == 0)
+        return 1;
+    else
+        return 0;
+
+}
+
+int maximum(int x, int y) {
+
+    if (x > y)
+        return x;
+    else
+        return y;
+}
+
+int digit(int x) {
+
+    int max = -1;
+    int k;
+
+    while (1) {
+        k = x % 10;
+        max = maximum(k, max);
+
+        x = x / 10;
+
+        if (x == 0)
+            break;
+    }
+
+    return max;
+
+}
+
+
+
+
+
+//4-1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int count(int n, int m){
+    
+    int cnt = 0;
+    int k;
+    
+    while(1){
+        k = n % 10;
+        
+        if(k==m)
+            cnt += 1;
+        
+        n = n / 10;
+        
+        if(n==0)
+            break;
+    }
+    
+    return cnt;
+}
+
+int main(){
+    
+    int n, m;
+    int result;
+    
+    scanf("%d %d",&n, &m);
+    
+    result = count(n,m);
+    
+    printf("%d",result);
+    
+    return 0;
+}
+
+//4-2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int count(int n, int m){
+    
+    int cnt = 0;
+    int k;
+    
+    while(1){
+        k = n % 10;
+        
+        if(k==m)
+            cnt += 1;
+        
+        n = n / 10;
+        
+        if(n==0)
+            break;
+    }
+    
+    return cnt;
+}
+
+int main(){
+    
+    int n, m;
+    int result = 0;
+    
+    scanf("%d", &m);
+    
+    while(1){
+        
+        scanf("%d",&n);
+        
+        if(n<0)
+            break;
+            
+        result += count(n,m);
+    }
+    
+    printf("%d",result);
+    
+    return 0;
+}
+
+//4-3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int count(int n, int m){
+    
+    int cnt = 0;
+    int k;
+    
+    while(1){
+        k = n % 10;
+        
+        if(k==m)
+            cnt += 1;
+        
+        n = n / 10;
+        
+        if(n==0)
+            break;
+    }
+    
+    return cnt;
+}
+
+int main(){
+    
+    int n;
+    int result = 0;
+    int i;
+    int cnt[10] = {0};
+    
+    while(1){
+        
+        scanf("%d",&n);
+        
+        if(n<0)
+            break;
+        
+        for(i=0;i<10;i++)
+            cnt[i] += count(n,i);
+        
+    }
+    
+    for(i=0;i<10;i++)
+        printf("%d ",cnt[i]);
+    
+    return 0;
+}
+
+//5-1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int add_digits(int n){
+    
+    int k;
+    int result = 0;
+    
+    while(n!=0){
+        k = n % 10;
+        result += k;
+        n = n / 10;
+    }
+    
+    return result;
+}
+
+int main(){
+    
+    int n;
+    int result;
+    
+    scanf("%d",&n);
+    
+    result = add_digits(n);
+    
+    printf("%d %d",n,result);
+    
+    return 0;
+}
+
+//5-2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int add_digits(int n){
+    
+    int k;
+    int result = 0;
+    
+    while(n!=0){
+        k = n % 10;
+        result += k;
+        n = n / 10;
+    }
+    
+    return result;
+}
+
+int main(){
+    
+    int n;
+    int result;
+    
+    scanf("%d",&n);
+    
+    result = add_digits(n);
+    
+    while(1){
+        
+        if(result / 10 == 0)
+            break;
+        
+        result = add_digits(result);
+    }
+    
+    printf("%d",result);
+    
+    return 0;
+}
+
+아마 이게 맞을 듯
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int add(int n);
+
+int main()
+{
+    int n;
+    int result;
+
+    scanf("%d", &n);
+
+    while (1) {
+
+        result = add(n);
+
+        if (result / 10 == 0)
+            break;
+
+        n = result;
+
+    }
+
+    printf("%d", result);
+
+    return 0;
+}
+
+int add(int n) {
+
+    int total = 0;
+
+    while (1) {
+        total += n % 10;
+
+        n = n / 10;
+
+        if (n == 0)
+            break;
+    }
+
+    return total;
+}
+
+
+//5-3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int add_digits(int n){
+    
+    int k;
+    int result = 0;
+    
+    while(n!=0){
+        k = n % 10;
+        result += k;
+        n = n / 10;
+    }
+    
+    return result;
+}
+
+int main(){
+    
+    int n = 1;
+    int result;
+    int min = 10;
+    int k;
+    
+    while(1){
+        
+        scanf("%d",&n);
+        
+        if(n<0)
+            break;
+        
+        result = add_digits(n);
+        
+        while(1){
+            if(result / 10 == 0)
+                break;
+                
+            result = add_digits(result);
+        }
+        
+        if(min > result){
+            min = result;
+            k = n;
+        }
+    }
+    
+    printf("%d %d",k,min);
+    
+    return 0;
+}

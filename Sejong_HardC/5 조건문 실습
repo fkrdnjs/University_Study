@@ -1,0 +1,254 @@
+//7
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int n;
+	int k;
+	
+	scanf("%d", &n);
+	
+	scanf("%d",&k);
+	
+	if(n == k)
+	    printf("RIGHT");
+	else if(n < k){
+	    printf("DOWN\n");
+	    
+	    scanf("%d",&k);
+	    
+	    if(n == k)
+	        printf("RIGHT");
+	        
+	    else if(n < k)
+	        printf("DOWN");
+	        
+	    else if(n> k)
+	        printf("UP");    
+	    
+	}
+	
+	else if(n> k){
+	    printf("UP\n");
+	    
+	    scanf("%d",&k);
+	    
+	    if(n == k)
+	        printf("RIGHT");
+	        
+	    else if(n < k)
+	        printf("DOWN");
+	        
+	    else if(n> k)
+	        printf("UP");
+	}
+	
+	return 0;
+}
+
+//8
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int n;
+	
+	scanf("%d",&n);
+	
+	if(n % 4 != 0)
+	    printf("common year");
+	else{
+	    if(n%100 != 0)
+	        printf("leap year");
+	    else{
+	        if(n % 400 == 0)
+	            printf("leap year");
+	        else
+	            printf("common year");
+	    }
+	}
+	
+	return 0;
+}
+
+//9 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int y1, m1, d1;
+	int y2, m2, d2;
+	
+	scanf("%d/%d/%d", &y1, &m1, &d1);
+	scanf("%d/%d/%d", &y2, &m2, &d2);
+	
+	if(y1 < y2)
+	    printf("%02d/%02d/%02d",y1, m1, d1);
+	else if(y1 > y2)
+	    printf("%02d/%02d/%02d",y2, m2, d2);
+	else{
+	    if(m1 < m2)
+	        printf("%02d/%02d/%02d",y1, m1, d1);
+	    else if(m1 > m2)
+	        printf("%02d/%02d/%02d",y2, m2, d2);
+	    else{
+	        if(d1 < d2)
+	            printf("%02d/%02d/%02d",y1, m1, d1);
+	        else if(d1 > d2)
+	            printf("%02d/%02d/%02d",y2, m2, d2);
+	        else{
+	            printf("%02d/%02d/%02d*",y1, m1, d1);
+	        }
+	    }
+	}
+	return 0;
+}
+
+//10
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int k, e, m;
+	double avg;
+	char grade;
+	
+	scanf("%d %d %d",&k, &e, &m);
+	
+	avg = (double)(k+e+m) / 3.0;
+	
+	if(avg >= 91.5)
+	    grade = 'A';
+	else if(avg >= 85.5)
+	    grade = 'B';
+	else if(avg >= 80.5)
+	    grade = 'C';
+	else
+	    grade = 'F';
+	    
+	printf("%c",grade);
+	    
+	if(k==100 || e ==100 || m == 100)
+	    printf("Good");
+	
+	if(k<60 || e < 60 || m < 60)
+	    printf("Bad");
+	
+	return 0;
+}
+
+//11
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int a, b, c;
+	int ea, eb, ec;
+	int strike = 0, ball = 0;
+	
+	scanf("%d %d %d",&a, &b, &c);
+	scanf("%d %d %d",&ea, &eb, &ec);
+	
+	if(ea == a)
+	    strike += 1;
+	else if(ea == b || ea == c)
+	    ball += 1;
+	    
+	if(eb == b)
+	    strike += 1;
+	else if(eb == a || eb == c)
+	    ball += 1;
+	
+	if(ec == c)
+	    strike += 1;
+	else if(ec == b || ec == a)
+	    ball += 1;
+	
+	printf("%dS%dB",strike,ball);
+	
+	return 0;
+}
+
+//12
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int n, m;
+	int five=0, one=0;
+	
+	scanf("%d",&n);
+	scanf("%d",&m);
+	
+	if(n == 1){
+	    printf("Americano\n");
+	    five = (m-500) / 500;
+	    one = ((m-500) - 500 * five) / 100;
+	}
+	
+	else if(n == 2){
+	    printf("Cafe Latte\n");
+	    five = (m-400) / 500;
+	    one = ((m-400) - 500 * five) / 100;
+	}
+	
+	else if(n == 3){
+	    printf("Lemon Tea\n");
+	    five = (m-300) / 500;
+	    one = ((m-300) - 500 * five) / 100;
+	}
+	
+	printf("%d %d",five, one);
+	
+	return 0;
+}
+
+//13
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int k, e, m;
+	double avg;
+	char grade;
+	
+    scanf("%d %d %d",&k, &e, &m);
+    
+    avg = (double)(k+e+m) / 3.00;
+    
+    printf("%.2lf\n",avg);
+    
+    switch((int)avg/25)
+    {
+        case 4:
+            grade = 'A';
+            break;
+        case 3:
+            grade = 'A';
+            break;
+        case 2:
+            grade = 'B';
+            break;
+        default:
+            grade = 'F';
+            break;
+    }
+    
+    printf("%c",grade);
+	
+	return 0;
+}

@@ -1,0 +1,257 @@
+//1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	char k;
+	
+	scanf("%c",&k);
+	
+	if(k>='a' && k<='z')
+	    k = k - 'a' + 'A';
+	else if(k>='A' && k<='Z')
+	    k = k + 'a' - 'A';
+	else 
+	    k = k;
+	    
+	printf("%c",k);
+	
+	return 0;
+}
+
+//2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int a, b, c;
+	int total = 0;
+	
+    scanf("%d %d %d",&a, &b, &c);
+    
+    switch(a)
+    {
+        case 1:
+            printf("Pizza\n");
+            total += 15000;
+            break;
+        case 2:
+            printf("Burger\n");
+            total += 5000;
+            break;
+        case 3:
+            printf("Salad\n");
+            total += 4500;
+            break;
+        case 4:
+            printf("Ice cream\n");
+            total += 800;
+            break;
+        case 5:
+            printf("Beverage\n");
+            total += 500;
+            break;
+        default:
+            printf("none\n");
+    }
+	
+	switch(b)
+    {
+        case 1:
+            printf("Pizza\n");
+            total += 15000;
+            break;
+        case 2:
+            printf("Burger\n");
+            total += 5000;
+            break;
+        case 3:
+            printf("Salad\n");
+            total += 4500;
+            break;
+        case 4:
+            printf("Ice cream\n");
+            total += 800;
+            break;
+        case 5:
+            printf("Beverage\n");
+            total += 500;
+            break;
+        default:
+            printf("none\n");
+    }
+    
+    switch(c)
+    {
+        case 1:
+            printf("Pizza\n");
+            total += 15000;
+            break;
+        case 2:
+            printf("Burger\n");
+            total += 5000;
+            break;
+        case 3:
+            printf("Salad\n");
+            total += 4500;
+            break;
+        case 4:
+            printf("Ice cream\n");
+            total += 800;
+            break;
+        case 5:
+            printf("Beverage\n");
+            total += 500;
+            break;
+        default:
+            printf("none\n");
+    }
+    
+    printf("Total:%dwon",total);
+    
+	return 0;
+}
+
+//3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int a, b, c;
+	int f = 0;
+	
+	scanf("%d %d %d",&a, &b, &c);
+	
+	if(c == a + b){
+	    printf("+\n");
+	    f = 1;
+	}
+	
+	if(a > b && a - b == c){
+	    printf("-\n");
+	    f = 1;
+	}
+	
+	if(a < b && b - a == c){
+	    printf("-\n");
+        f = 1;
+	}
+	
+	if(c == a * b){
+	    printf("*\n");
+	    f = 1;
+	}
+	
+	if(a / b == c){
+	    printf("/\n");
+	    f = 1;
+	}
+	
+	if(f == 0)
+	    printf("Incorrect");
+    
+	return 0;
+}
+
+//4
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int a, b, result;
+	char k;
+	
+	scanf("%d %c %d",&a, &k, &b);
+	
+	if(k == '+')
+	    result = a + b;
+	else if(k == '-')
+	    result = a - b;
+	else if(k == '*')
+	    result = a * b;
+	    
+	printf("%d",result);
+    
+	return 0;
+}
+
+//5
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int f = 1;
+	double a, b;
+	double result;
+	char k;
+	
+	scanf("%lf%c%lf",&a,&k,&b);
+	
+	if(k=='p')
+	    result = a + b;
+	else if(k == 'M')
+	    result = a * b;
+	else if( k == 'm')
+	    result = a - b;
+	else if ( k == 'o')
+	    result = a / b;
+	else
+	    f = 0;
+	    
+	if(f == 1)
+	    printf("%.1lf",result);
+	else
+	    printf("incorrect");
+    
+	return 0;
+}
+
+스위치 이용
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int main()
+{
+    double a, b;
+    char c;
+
+    scanf("%lf%c%lf", &a, &c, &b);
+
+    switch (c) {
+    case 'p':
+        printf("%.2lf", a + b);
+        break;
+
+    case 'M':
+        printf("%.2lf", a * b);
+        break;
+
+    case 'o':
+        printf("%.2lf", a / b);
+        break;
+
+    case 'm':
+        printf("%.2lf", a - b);
+        break;
+
+    default:
+        printf("incorrect");
+
+    }
+
+    return 0;
+}

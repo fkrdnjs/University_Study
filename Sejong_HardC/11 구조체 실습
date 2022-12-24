@@ -1,0 +1,381 @@
+//1번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct vector {
+    int a;
+    int b;
+    int c;
+};
+
+typedef struct vector vec;
+
+int main()
+{
+    vec x, y, z;
+
+    scanf("%d %d %d", &x.a, &x.b, &x.c);
+    scanf("%d %d %d", &y.a, &y.b, &y.c);
+
+    z.a = x.a * y.a;
+    z.b = x.b * y.b;
+    z.c = x.c * y.c;
+
+    printf("%d %d %d\n%d", z.a, z.b, z.c, z.a+z.b+z.c);
+
+
+    return 0;
+}
+
+
+//3번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct student {
+    
+    char name[10];
+    int score;
+
+};
+
+typedef struct student st;
+
+int main()
+{
+    st x[5];
+    int i;
+    int total = 0;
+    double avg;
+
+    for (i = 0; i < 5; i++) {
+        scanf("%s %d", x[i].name, &x[i].score);
+        total += x[i].score;
+    }
+
+    avg = (double)total / 5.0;
+
+    for (i = 0; i < 5; i++) {
+        if (x[i].score <= avg)
+            printf("%s\n", x[i].name);
+    }
+
+
+
+    return 0;
+}
+
+//7번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct number {
+    
+    int score;
+    int sort;
+
+};
+
+typedef struct number num;
+
+int main()
+{
+    num k[10];
+    int i, j;
+
+    for (i = 0; i < 10; i++) {
+        scanf("%d", &k[i].score);
+        k[i].sort = 0;
+    }
+
+    for (i = 0; i < 10; i++) {
+        for (j = 0; j < 10; j++) {
+            if (i != j) {
+                if (k[i].score >= k[j].score)
+                    k[i].sort += 1;
+            }
+        }
+    }
+
+    for (i = 0; i < 10; i++) {
+        if (k[i].sort == 3 || k[i].sort == 7)
+            printf("%d ", k[i].score);
+    }
+
+    return 0;
+}
+
+
+//8번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct complex {
+    double sil;
+    double heo;
+};
+
+typedef struct complex com;
+
+com add(com a, com b);
+
+int main()
+{
+    com a, b, c;
+
+    scanf("%lf %lf", &a.sil, &a.heo);
+    scanf("%lf %lf", &b.sil, &b.heo);
+
+    c = add(a, b);
+
+    printf("%.1lf + %.1lfi", c.sil, c.heo);
+
+    return 0;
+}
+
+com add(com a, com b) {
+
+    com c;
+
+    c.sil = a.sil + b.sil;
+    c.heo = a.heo + b.heo;
+
+    return c;
+}
+
+//9번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct result {
+    int max;
+    int min;
+    char k;
+    int gijun;
+    int cha;
+};
+
+typedef struct result re;
+
+void passorfail(re* p);
+
+int main()
+{
+    re x;
+    re* p = &x;
+
+    scanf("%d %d %d", &p->max, &p->min, &p->gijun);
+
+    passorfail(p);
+
+    printf("%d %c", p->cha, p->k);
+
+    return 0;
+}
+
+void passorfail(re* p) {
+
+    p->cha = p->max - p->min;
+
+    if (p->cha <= p->gijun)
+        p->k = 'P';
+    else
+        p->k = 'F';
+
+}
+
+//10
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct date {
+    int year;
+    int month;
+    int day;
+};
+
+typedef struct date da;
+
+da* select(da* p, da* q);
+
+int main()
+{
+    da x, y;
+    da* z;
+
+    scanf("%d/%d/%d", &x.year, &x.month, &x.day);
+    scanf("%d/%d/%d", &y.year, &y.month, &y.day);
+
+    z = select(&x, &y);
+
+    printf("%d/%d/%d", z->year, z->month, z->day);
+
+    return 0;
+}
+
+da* select(da* p, da* q) {
+
+    if (p->year < q->year)
+        return p;
+    else if (p->year > q->year)
+        return q;
+    else {
+        if (p->month < q->month)
+            return p;
+        else if (p->month > q->month)
+            return q;
+        else {
+            if (p->day < q->day)
+                return p;
+            else
+                return q;
+        }
+    }
+    
+}
+
+//11번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct student {
+    char name[10];
+    int score;
+};
+
+typedef struct student st;
+
+st* select(st* p);
+
+int main()
+{
+    st x[5];
+    st* p = x;
+    st* result;
+
+    for (p = x; p < x + 5; p++)
+        scanf("%s %d", p->name, &p->score);
+
+    result = select(x);
+
+    printf("%s %d", result->name, result->score);
+
+    return 0;
+}
+
+st* select(st* p) {
+
+    st* q, *r = p;
+    int min = 101;
+
+    for (q = p; q < p + 5; q++) {
+        if (q->score < min) {
+            min = q->score;
+            r = q;
+        }
+    }
+
+    return r;
+}
+
+//12
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct student {
+    char name[10];
+    int a;
+    int b;
+    int c;
+    double avg;
+};
+
+typedef struct student st;
+
+void read(st x[]);
+void cal(st x[]);
+void sort(st x[]);
+void print(st x[]);
+
+int main()
+{
+    st x[10];
+    read(x);
+    cal(x);
+    sort(x);
+    print(x);
+
+    return 0;
+}
+
+void read(st x[]) {
+    int i;
+
+    for (i = 0; i < 10; i++)
+        scanf("%s %d %d %d", x[i].name, &x[i].a, &x[i].b, &x[i].c);
+}
+
+void cal(st x[]) {
+    int total = 0;
+    int i;
+ 
+    for (i = 0; i < 10; i++) {
+        total = 0;
+
+        total += x[i].a + x[i].b + x[i].c;
+
+        x[i].avg = (double)total / 3.0;
+
+    }
+}
+
+void sort(st x[]) {
+    st tmp;
+    int i, j;
+    
+    for (i = 0; i < 10; i++) {
+        for (j = i + 1; j < 10; j++) {
+            if (x[i].avg < x[j].avg) {
+                tmp = x[i];
+                x[i] = x[j];
+                x[j] = tmp;
+            }
+        }
+    }
+}
+
+void print(st x[]) {
+
+    int i;
+    
+    printf("%s %.2lf\n", x[0].name, x[0].avg);
+    printf("%s %.2lf\n", x[9].name, x[9].avg);
+
+    for(i=7;i<10;i++)
+        printf("%s %.2lf\n", x[i].name, x[i].avg);
+
+}

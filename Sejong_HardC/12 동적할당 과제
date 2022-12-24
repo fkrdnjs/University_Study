@@ -1,0 +1,360 @@
+ //1번
+ #define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void compare(char* x, char* y);
+
+int main()
+{
+    char* x = NULL, * y = NULL;
+    char tmp[51];
+    int len = 0;
+
+    gets(tmp);
+    len = strlen(tmp);
+
+    x = (char*)malloc((len + 1) * sizeof(char));
+    if (x == NULL)
+        return -1;
+
+    strcpy(x, tmp);
+
+    gets(tmp);
+    len = strlen(tmp);
+
+    y = (char*)malloc((len + 1) * sizeof(char));
+    if (y == NULL)
+        return -1;
+
+    strcpy(y, tmp);
+
+    compare(x, y);
+
+    free(y);
+    free(x);
+
+    return 0;
+}
+
+void compare(char* x, char* y) {
+
+    if (strcmp(x, y) == 0)
+        printf("identical");
+    else
+        printf("different");
+}
+
+//2번
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct st {
+    char* str;
+    int cnt;
+};
+
+typedef struct st st;
+
+int main()
+{
+    st* x, k;
+    int n, i, j, len;
+    char tmp[101];
+
+    scanf("%d", &n);
+    getchar();
+
+    x = (st*)malloc(n * sizeof(st));
+    if (x == NULL)
+        return -1;
+
+    for (i = 0; i < n; i++) {
+        scanf("%s", tmp);
+
+        len = strlen(tmp);
+
+        x[i].str = (char*)malloc((len + 1) * sizeof(char));
+
+        strcpy(x[i].str, tmp);
+        x[i].cnt = 0;
+    }
+
+    printf("\n");
+
+    for (i = 0; i < n; i++) {
+        len = strlen(x[i].str);
+
+        for (j = 0; j < len; j++) {
+            if (x[i].str[j] == 'a' || x[i].str[j] == 'e' || x[i].str[j] == 'i' || x[i].str[j] == 'o' || x[i].str[j] == 'u' || x[i].str[j] == 'A' || x[i].str[j] == 'E' || x[i].str[j] == 'I' || x[i].str[j] == 'O' || x[i].str[j] == 'U')
+                x[i].cnt += 1;
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        for (j = i; j < n; j++) {
+            if (x[i].cnt < x[j].cnt) {
+                k = x[i];
+                x[i] = x[j];
+                x[j] = k;
+            }
+        }
+    }
+
+    for (i = 0; i < n; i++)
+        printf("%s\n", x[i].str);
+
+    for (i = 0; i < n; i++)
+        free(x[i].str);
+    free(x);
+
+    return 0;
+}
+
+//3-1번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct student {
+    char* studentName; // 학생 이름
+    char id[5]; // 학생 학번
+    char* subjectName; // 과목 이름
+    double subjectScore; // 과목 점수
+};
+
+typedef struct student st;
+
+int main()
+{
+    int n, k;
+    char tmp[101], *p;
+    int i, j, len, cnt = 0;
+    double total = 0;
+    st* x, z;
+
+    scanf("%d", &n);
+    getchar();
+
+    x = (st*)malloc(n * sizeof(st));
+
+    for (i = 0; i < n; i++) {
+        gets(tmp);
+        p = tmp;
+        len = strlen(tmp);
+        cnt = 0;
+        total = 0;
+
+        for (p = tmp; *p != '\0'; p++) {
+            if (*p == ' ')
+                *p = '\0';
+        }
+
+        for (p = tmp; p < tmp + len; p++) {
+            if (p == tmp) {
+                x[i].studentName = (char*)malloc(sizeof(char) * (strlen(p) + 1));
+
+                strcpy(x[i].studentName,p);
+
+                cnt += 1;
+            }
+
+            else if (*p == '\0' && cnt == 1) {
+                cnt += 1;
+
+                strcpy(x[i].id, p + 1);
+            }
+
+            else if (*p == '\0' && cnt == 2) {
+                cnt += 1;
+
+                x[i].subjectName = (char*)malloc(sizeof(char) * (strlen(p + 1) + 1));
+
+                strcpy(x[i].subjectName, p + 1);
+            }
+
+            else if (*p == '\0' && cnt == 3) {
+                if (strlen(p + 1) == 1) {
+                    total = *(p + 1) - '0';
+                    x[i].subjectScore = total;
+                }
+                else if (strlen(p + 1) == 2) {
+                    total = (*(p + 1) - '0') * 10 + (*(p + 2) - '0');
+                    x[i].subjectScore = total;
+                }
+                else if (strlen(p + 1) == 3) {
+                    x[i].subjectScore = 100;
+                }
+            }
+
+        }
+
+    }
+
+    scanf("%d", &k);
+
+    for (i = 0; i < n; i++) {
+        for (j = i; j < n; j++) {
+            if (x[i].subjectScore < x[j].subjectScore) {
+                z = x[i];
+                x[i] = x[j];
+                x[j] = z;
+            }
+        }
+    }
+
+    printf("%s %s %s %.2lf", x[k - 1].studentName, x[k - 1].id, x[k - 1].subjectName, x[k - 1].subjectScore);
+
+
+ for (i = 0; i < n; i++) {
+        free(x[i].subjectName);
+        free(x[i].studentName);
+    }
+
+    free(x);
+    
+    return 0;
+}
+
+
+//3-2번
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct subject {
+    char* name; // 과목 이름
+    double score; // 과목 점수
+};
+
+struct student {
+    char* name; // 학생 이름
+    char id[5]; // 학생 학번
+    int numSubject; // 과목 개수
+    struct subject* psub; // 과목 구조체 포인터
+    double avg; // 모든 과목의 평균 점수
+};
+
+typedef struct student st;
+
+int main()
+{
+    int n, k, num, max, k2;
+    char tmp[101], *p, *q, *r;
+    int i, j, len, cnt = 0, h;
+    double total = 0;
+    st* x, z;
+
+    scanf("%d", &n);
+    getchar();
+
+    x = (st*)malloc(n * sizeof(st));
+
+    for (i = 0; i < n; i++) {//정보 입력
+        gets(tmp);
+        len = strlen(tmp);
+        h = 0;
+        cnt = 0;
+        total = 0;
+
+        for (p = tmp; *p != '\0'; p++) {
+            if (*p == ' ') {
+                *p = '\0';
+                cnt += 1;
+            }
+        }
+        x[i].numSubject = cnt / 2;
+        x[i].psub = (struct subject*)malloc(x[i].numSubject * sizeof(struct subject));
+
+        x[i].name = (char*)malloc(sizeof(char) * (strlen(tmp) + 1));
+        strcpy(x[i].name, tmp);//이름 입력
+
+        for (p = tmp; p < tmp + len; p++) {//학번입력
+            if (*p == '\0') {
+                strcpy(x[i].id, p + 1);
+                break;
+            }
+        }
+
+        for (q = p + 1; q < tmp + len; q++) {//과목, 점수 입력
+            if (*q == '\0' && h % 2 == 0) {
+                x[i].psub[h/2].name = (char*)malloc(sizeof(char) * (strlen(q + 1) + 1));
+                strcpy(x[i].psub[h/2].name, q + 1);
+
+                h += 1;
+            }
+            else if (*q == '\0' && h % 2 == 1) {
+                
+                if (strlen(q + 1) == 1) {
+                    total += *(q + 1) - '0';
+                    x[i].psub[h/2].score = *(q + 1) - '0';
+                }
+                else if (strlen(q + 1) == 2) {
+                    total += ((*(q + 1) - '0') * 10) + (*(q + 2) - '0');
+                    x[i].psub[h/2].score = ((*(q + 1) - '0') * 10) + (*(q + 2) - '0');
+                }
+                else {
+                    total += 100;
+                    x[i].psub[h/2].score = 100;
+                }
+                h += 1;
+            }
+        }
+
+        x[i].avg = total / (double)x[i].numSubject;//평균점수 입력
+
+    }
+
+    scanf("%d", &k);
+
+    for (i = 0; i < n; i++) {//내림차순 정렬
+        for (j = i; j < n; j++) {
+            if (x[i].avg < x[j].avg) {
+                z = x[i];
+                x[i] = x[j];
+                x[j] = z;
+            }
+            else if (x[i].avg == x[j].avg && strcmp(x[i].id, x[j].id) > 0) {
+                z = x[i];
+                x[i] = x[j];
+                x[j] = z;
+            }
+        }
+    }
+
+    max = -1;
+
+    printf("%s %s %.2lf ", x[k - 1].name, x[k - 1].id, x[k - 1].avg);
+
+    for (i = 0; i < x[k - 1].numSubject; i++) {
+        if (x[k - 1].psub[i].score > max) {
+            k2 = i;
+            max = x[k - 1].psub[i].score;
+        }
+    }
+
+    printf("%s %.2lf", x[k - 1].psub[k2].name, x[k - 1].psub[k2].score);
+
+    return 0;
+}
+
+/*
+HongGilDong 1003 Math 85 C 80 AdvC 90
+JeonWooChi 1001 English 60 C 75 Physics 80 Math 70
+HeungBoo 1002 Economics 80 AdvC 90 Math 80 C 90
+NolBoo 1004 Ethics 50 C 62
+Euler 1005 Math 100 Physics 90 AdvC 85
+*/
+
+
+//4번

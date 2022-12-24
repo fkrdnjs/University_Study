@@ -1,0 +1,503 @@
+//1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int add(int x, int y);
+
+int main()
+{
+	int n;
+	int i;
+	int result = 0;
+	
+	scanf("%d",&n);
+	
+	for(i=1;i<=n;i++)
+	    result = add(result, i);
+	
+    printf("%d",result);
+    
+	return 0;
+}
+
+int add(int x, int y){
+    return x + y;
+}
+
+//2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int sum(int k);
+
+int main()
+{
+	int a, b;
+	int add;
+	int sub;
+	int result;
+	
+	scanf("%d %d",&a, &b);
+	
+	add = sum(b);
+    sub = sum(a);
+    result = add - sub + a;
+    
+    printf("%d",result);
+    
+	return 0;
+}
+
+int sum(int k){
+    
+    return k*(k+1)/2;
+}
+
+//3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int sum(int k);
+
+int main()
+{
+	int n;
+	int i;
+	int total = 0;
+	
+	scanf("%d",&n);
+	
+	for(i=1;i<=n;i++)
+	    total += sum(i);
+    
+    printf("%d",total);
+    
+	return 0;
+}
+
+int sum(int k){
+    
+    return k*(k+1)/2;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void print_row1(int x);
+void print_row2(int x);
+
+int main()
+{
+	int n;
+	int i;
+	
+	scanf("%d",&n);
+	
+	for(i=0;i<n;i++){
+	    if(i==0 || i == n-1)
+	        print_row1(n);
+	    else
+	        print_row2(n);
+	}
+
+	return 0;
+}
+
+void print_row1(int x){
+    int i;
+    
+    for(i=0;i<x;i++)
+        printf("%d",x);
+    printf("\n");
+}
+
+void print_row2(int x){
+    int i;
+    
+    for(i=0;i<=x;i++){
+        if(i == 0 || i == x-1)
+            printf("%d",x);
+        else
+            printf("  ");
+    }
+    printf("\n");
+}
+
+//5
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void print_triangle(int x);
+
+int main()
+{
+	int n;
+	
+	scanf("%d",&n);
+	
+	while(1){
+	    if(n==0 || n < 0)
+	        break;
+	    else
+	        print_triangle(n);
+	        
+	    scanf("%d",&n);
+	}
+  
+	return 0;
+}
+
+void print_triangle(int x){
+    
+    int i,j;
+    
+    for(i=1;i<=x;i++){
+        for(j=1;j<=i;j++){
+            printf("*");
+        }
+        printf("\n");
+    }
+    
+}
+
+//7
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int func2(int x, int a, int  b, int c);
+
+int main()
+{
+	int x, a, b, c;
+	int result;
+	
+	scanf("%d",&x);
+	scanf("%d %d %d",&a, &b, &c);
+	
+	result = func2(x,a,b,c);
+  
+    printf("%d",result);
+    
+	return 0;
+}
+
+int func2(int x, int a, int b, int c){
+    
+    int total;
+    
+    total = a*x*x + b*x + c;
+    
+    return total;
+}
+
+//8
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int func2(int x, int a, int  b, int c);
+
+int main()
+{
+	int x, a, b, c, d, e, f;
+	int result;
+	
+	scanf("%d",&x);
+	scanf("%d %d %d",&a, &b, &c);
+	scanf("%d %d %d",&d, &e, &f);
+	
+	result = func2(x,a,b,c);
+	result = func2(result,d,e,f);
+  
+    printf("%d",result);
+    
+	return 0;
+}
+
+int func2(int x, int a, int b, int c){
+    
+    int total;
+    
+    total = a*x*x + b*x + c;
+    
+    return total;
+}
+
+//9
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int max1;
+int max2;
+
+void update_max(int x);
+
+int main()
+{
+	int n;
+	int a, b;
+	
+	scanf("%d %d",&a, &b);
+	
+	if(a < b){
+	    max1 = b;
+	    max2 = a;
+	}
+	else{
+	    max1 = a;
+	    max2 = b;
+	}
+	
+	while(1){
+	    scanf("%d",&n);
+	    if(n==0)
+	        break;
+	    else
+	        update_max(n);
+	}
+	
+    printf("%d %d",max1, max2);
+    
+	return 0;
+}
+
+void update_max(int x){
+    
+    if(x>=max1){
+        max2 = max1;
+        max1 = x;
+    }
+    else if(max1 > x && x>=max2){
+        max2 = x;
+    }
+}
+
+//10
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int n;
+
+void die1(int x);
+void die2(int x, int y);
+void die3(int x, int y, int z);
+
+int main()
+{
+    int i;
+    
+	scanf("%d",&n);
+	
+	for(i=1;i<=6;i++)
+	    die1(i);
+    
+	return 0;
+}
+
+void die1(int x){
+    int i;
+    for(i=1;i<=6;i++)
+        die2(x,i);
+}
+void die2(int x, int y){
+    int i;
+    for(i=1;i<=6;i++)
+        die3(x,y,i);
+}
+void die3(int x, int y, int z){
+    if(x+y+z == n)
+        printf("%d %d %d\n",x,y,z);
+}
+
+//11
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int ra, rb, rc;
+
+int count_strike(int a, int b, int c);
+int count_ball(int a, int b, int c);
+
+int main()
+{
+    int a, b, c;
+    int strike, ball;
+    
+    scanf("%d %d %d",&ra, &rb, &rc);
+    
+    while(1){
+        scanf("%d %d %d",&a, &b, &c);
+        
+        strike = count_strike(a, b, c);
+        ball = count_ball(a, b, c);
+        
+        printf("%dS%dB\n",strike, ball);
+        
+        if(a == ra && b == rb && c == rc)
+            break;
+        
+    }
+    
+	return 0;
+}
+
+int count_strike(int a, int b, int c){
+    int st=0;
+    
+    if(a == ra)
+        st += 1;
+    if(b == rb)
+        st += 1;
+    if(c == rc)
+        st += 1;
+    return st;
+}
+
+int count_ball(int a, int b, int c){
+    int ba = 0;
+    
+    if(a == rb || a == rc)
+        ba += 1;
+    if(b == ra || b == rc)
+        ba += 1;
+    if(c == ra || c == rb)
+        ba += 1;
+    return ba;
+}
+
+//12
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void print(int x, int y, int z){
+    int i;
+    
+    for(i=0;i<x;i++)
+        printf("  ");
+    for(i=0;i<y;i++)
+        printf("*");
+    for(i=0;i<z;i++)
+        printf("  ");
+}
+
+int main(){
+    
+    int k;
+    int a, b, c;
+    int i;
+    
+    scanf("%d",&k);
+    
+    a = k;
+    c = k;
+    
+    for(i=1;i<=k;i++){
+        a -= 1;
+        c -= 1;
+        b = 2 * i - 1;
+        print(a,b,c);
+        printf("\n");
+    }
+    
+    return 0;
+}
+
+//13
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int count(int x){
+    
+    int cnt = 0;
+    
+    while(1){
+        if(x%10 == 3)
+            cnt += 1;
+        x = x / 10;
+        if(x == 0)
+            break;
+    }
+    
+    return cnt;
+}
+
+int main(){
+    
+    int n;
+    int i, k;
+    int total = 0;
+    
+    scanf("%d",&n);
+    
+    for(i=1;i<=n;i++){
+        k = count(i);
+        total += k;
+    }
+    
+    printf("%d",total);
+    
+    return 0;
+}
+
+//14
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int isprime(int x){
+    
+    int cnt = 0;
+    int i;
+    
+    for(i=1;i<=x;i++){
+        if(x%i==0)
+            cnt += 1;
+    }
+    if(cnt == 2)
+        return 1;
+    else
+        return 0;
+}
+
+int nextprime(int x){
+    
+    int i;
+    int k;
+    
+    for(i=x+1; ;i++){
+        k = isprime(i);
+        
+        if(k==1)
+            break;
+    }
+    
+    return i;
+}
+
+int main(){
+    
+    int n, m;
+    int i;
+    int k;
+    
+    scanf("%d %d", &n, &m);
+    
+    for(i=0;i<m;i++){
+        k = nextprime(n);
+        printf(" %d",k);
+        n = k;
+    }
+    
+    return 0;
+}

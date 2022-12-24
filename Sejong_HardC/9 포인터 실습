@@ -1,0 +1,572 @@
+//1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	int x, y, z;
+	int *px, *py, *pz, *tmp;
+	
+	px = &x;
+	py = &y;
+	pz = &z;
+	
+	scanf("%d %d %d",px,py,pz);
+	
+	tmp = pz;
+	pz = py;
+	py = px;
+	px = tmp;
+	
+	printf("%d %d %d",*px, *py, *pz);
+
+	return 0;
+}
+
+//2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    char ch[20];
+    char *p = ch;
+    char *q;
+    
+    scanf("%s",p);
+    
+    for(p=ch;*p!='\0';p++){
+        if(*p == '#'){
+            q = p - 1;
+            break;
+        }
+    }
+    
+    for(p=q;p>=ch;p--)
+        printf("%c",*p);
+    
+	return 0;
+}
+
+//3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int ar[50] = {0};
+    int n;
+    int *p;
+    
+    scanf("%d",&n);
+    
+    for(p=ar;p<ar+n;p++)
+        scanf("%d",p);
+        
+    for(p=ar;p<ar+n;p++){
+        if(*p == 0)
+            break;
+    }
+    
+    printf("%d",p-ar);
+    
+	return 0;
+}
+
+//4 포인터 버블 정렬 문제
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int x[3];
+    int *p = x;
+    int *q = x;
+    int i,j,tmp;
+    
+    for(p=x;p<x+3;p++)
+        scanf("%d",p);
+    
+    p = x;
+        
+    for(i=0;i<3;i++){
+        for(j=0;j<3-i-1;j++){
+            if(*(p+j)>*(p+j+1)){
+                tmp = *(p+j);
+                *(p+j) = *(p+j+1);
+                *(p+j+1) = tmp;
+            }
+        }
+    }
+    
+    printf("%d",*(p+1));
+    
+	return 0;
+}
+
+//5
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int arr[5];
+    int rank[5] = {1, 1, 1, 1, 1};
+    int *pa, *pr, *pb;
+    
+    for(pa = arr;pa<arr+5;pa++)
+        scanf("%d",pa);
+        
+    pr = rank;
+      
+    for(pa=arr;pa<arr+5;pa++){
+        for(pb=arr;pb<arr+5;pb++){
+            if(*pa<*pb)
+                *pr += 1;
+        }
+        pr += 1;
+    }
+    
+    pr = rank;
+    
+    for(pa=arr;pa<arr+5;pa++){
+        printf("%d=r%d ",*pa, *pr);
+        pr += 1;
+    }
+    
+	return 0;
+}
+
+//6
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+	char ch[10];
+	char *p = ch;
+	char *q, *r;
+	int cnt = 0;
+	int max = 0;
+	
+	scanf("%s",p);
+	
+	for(p=ch;*p!='\0';p++){
+	    for(q=p;*q!='\0';q++){
+	        if(*q == *p)
+	            cnt += 1;
+	    }
+	    if(max < cnt){
+	        max = cnt;
+	        r = p;
+	    }
+	    cnt = 0;
+	}
+	
+	printf("%c %d",*r,max);
+
+	return 0;
+}
+
+//7
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void input(int *p, int *q, int *r){
+    
+    scanf("%d %d %d",p,q,r);
+    
+}
+
+void output(int *p, int *q, int *r){
+    
+    printf("%d %d %d",*p, *q, *r);
+    
+}
+
+int main()
+{
+	int x, y, z;
+	input(&x, &y, &z);
+	output(&x, &y, &z);
+
+	return 0;
+}
+
+//8
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void swap(int *p, int *q){
+    
+    int tmp;
+    
+    tmp = *p;
+    *p = *q;
+    *q = tmp;
+    
+}
+
+int main()
+{
+	int n, a, b;
+	int ar[50];
+	int *p = ar;
+	
+	scanf("%d",&n);
+	
+	for(p=ar;p<ar+n;p++)
+	    scanf("%d",p);
+	    
+	scanf("%d %d",&a, &b);
+	
+	swap(ar+a,ar+b);
+	
+	for(p=ar;p<ar+n;p++)
+	    printf(" %d",*p);
+
+	return 0;
+}
+
+//9
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int *mid(int x[3]){
+    
+    int *p = x;
+    int *q = x+1;
+    int *r = x+2;
+    
+    if(*p >= *q && *p >= *r){
+        if(*q >= *r)
+            return q;
+        else
+            return r;
+    }
+    else if(*q >= *p && *q >= *r){
+        if(*p >= *r)
+            return p;
+        else
+            return r;
+    }
+    else if(*r >= *p && *r >= *q){
+        if(*p >= *q)
+            return p;
+        else
+            return q;
+    }
+    
+}
+
+int main()
+{
+	int x[3];
+	int *p = x;
+	int *result;
+	
+	for(p=x;p<x+3;p++)
+	    scanf("%d",p);
+	    
+	result = mid(x);
+	
+	printf("%d",*result);
+
+	return 0;
+}
+
+//다른버전
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int* mid(int* p);
+
+int main()
+{
+    int x[3];
+    int* p = x;
+    int* k;
+
+    for (p = x; p < x + 3; p++)
+        scanf("%d", p);
+
+    k = mid(x);
+
+    printf("%d", *k);
+
+    return 0;
+}
+
+int* mid(int* p) {
+
+    if (*p >= *(p + 1) && *p >= *(p + 2)) {
+        if (*(p + 1) >= *(p + 2))
+            return p + 1;
+        else
+            return p + 2;
+    }
+
+    if (*(p + 1) >= *p && *(p + 1) >= *(p + 2)) {
+        if (*p >= *(p + 2))
+            return p;
+        else
+            return p + 2;
+    }
+
+    if (*(p + 2) >= *p && *(p + 2) >= *(p + 1)) {
+        if (*p >= *(p + 1))
+            return p;
+        else
+            return p + 1;
+    }
+
+}
+
+
+
+
+//10
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void gcdlcm(int a, int b, int *p, int *q){
+    
+    int tmp;
+    int i;
+    
+    if(a>b){
+        tmp = a;
+        a = b;
+        b = tmp;
+    }
+    
+    for(i=1;i<=a;i++){
+        if(a % i == 0 && b % i ==0)
+            *p = i;
+    }
+    
+    for(i=b; ;i++){
+        if(i % a == 0 && i % b == 0){
+            *q = i;
+            break;
+        }
+    }
+}
+
+int main()
+{
+	int a, b;
+	
+	scanf("%d %d",&a, &b);
+	
+	gcdlcm(a,b,&a,&b);
+	
+	printf("%d %d",a,b);
+
+	return 0;
+}
+
+//11
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void strcopy(char a[], char b[]){
+    
+    char *p = a;
+    char *q = b;
+    
+    for(q=b;q<b+6;q++){
+        *p = *q;
+        p += 1;
+    }
+}
+
+int main()
+{
+	char a[6];
+	char b[6];
+    char *p;
+    
+    for(p=b;p<=b+6;p++)
+        scanf("%c",p);
+        
+    strcopy(a,b);
+    
+    for(p=a;p<=a+6;p++)
+        printf("%c",*p);
+    
+	return 0;
+}
+
+//12
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void add(int *p, int *q, int *r, int n){
+    
+    int *k;
+    
+    q = q + n - 1;
+    
+    for(k=p;k<p+n;k++){
+        *r = *k + *q;
+        q -= 1;
+        r += 1;
+    }
+}
+
+int main()
+{
+	int n;
+	int x[20], y[20], z[20];
+	int *p;
+	
+	scanf("%d",&n);
+	
+	for(p=x;p<x+n;p++)
+	    scanf("%d",p);
+	 
+	for(p=y;p<y+n;p++)
+	    scanf("%d",p);
+	
+	add(x,y,z,n);
+	
+	for(p=z;p<z+n;p++)
+	    printf(" %d",*p);
+    
+	return 0;
+}
+
+//13
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int arrsum(int *p, int *q){
+    
+    int *k;
+    int total = 0;
+    
+    for(k=p;k<=q;k++){
+        total += *k;
+    }
+    
+    return total;
+}
+
+int main()
+{
+	int n, s, e;
+	int x[100];
+	int *p;
+	int result;
+	
+	scanf("%d %d %d",&n, &s, &e);
+	
+	for(p=x;p<x+n;p++)
+	    scanf("%d",p);
+	    
+	result = arrsum(x+s,x+e);
+	
+	printf("%d",result);
+	
+    
+	return 0;
+}
+
+//14
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int add(int *p, int *q){
+    
+    int total = 0;
+    int *k;
+    
+    for(k=p;k<=q;k++)
+        total += *k;
+        
+    return total;
+}
+
+int main()
+{
+	int n;
+	int x[100];
+	int *p, *q;
+	int result = 0;
+	
+	scanf("%d",&n);
+	
+	for(p=x;p<x+n;p++)
+	    scanf("%d",p);
+	    
+	q = x;
+	
+	for(p=x;p<x+n;p++)
+	    result += add(q,p);
+	
+    printf("%d",result);
+    
+	return 0;
+}
+
+//15
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void abc(int *p, int k){
+    
+    int max = *p - 1;
+    int *q, *r;
+    int tmp;
+    
+    for(q=p;q<p+k;q++){
+        if(max <= *q){
+            max = *q;
+            r = q;
+        }
+    }
+    
+    tmp = *p;
+    *p = *r;
+    *r = tmp;
+    
+}
+
+int main()
+{
+	int x[10];
+	int *p = x;
+	int k = 10;
+	
+	for(p=x;p<x+10;p++)
+	    scanf("%d",p);
+	    
+	for(p=x;p<x+9;p++){
+	    abc(p,k);
+	    k -= 1;
+	}
+    
+    for(p=x;p<x+10;p++)
+        printf(" %d",*p);
+        
+	return 0;
+}
